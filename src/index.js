@@ -18,15 +18,24 @@ function create() {
   });
 }
 
+const gameOptions = {
+  width: 480,
+  height: 640,
+  gravity: 800,
+};
+
 const config = {
   type: Phaser.AUTO,
-  parent: 'phaser-example',
-  width: 800,
-  height: 600,
-  scene: {
-    preload,
-    create,
+  width: gameOptions.width,
+  height: gameOptions.height,
+  backgroundColor: '#4599ff',
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: gameOptions.gravity },
+    },
   },
+  scene: JumpScene,
 };
 
 const game = new Phaser.Game(config);
