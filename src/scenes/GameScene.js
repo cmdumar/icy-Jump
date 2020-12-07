@@ -22,6 +22,7 @@ function updateY(platform) {
     platform.y += delta / 30;
   }
 
+
   if (platform.y > 640) {
     platform.y = -platform.height;
     platform.x = Math.floor(Math.random() * 400) + 24;
@@ -119,6 +120,15 @@ export default class GameScene extends Phaser.Scene {
         quantity: 5,
         blendMode: 'ADD',
       });
+    }
+
+    if (player.body.y > gameOptions.height || player.body.blocked.down) {
+      this.cameras.main.shake(240, 0.01,
+        false, function (camera, progress) {
+          if (progress > 0.9) {
+            this.scene.start('Game');
+          }
+        });
     }
   }
 }
