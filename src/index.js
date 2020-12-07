@@ -1,22 +1,6 @@
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
-
-function preload() {
-  this.load.image('logo', logoImg);
-}
-
-function create() {
-  const logo = this.add.image(400, 150, 'logo');
-
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: 'Power2',
-    yoyo: true,
-    loop: -1,
-  });
-}
+import StartScene from './scenes/StartScene';
+import GameScene from './scenes/GameScene';
 
 const gameOptions = {
   width: 480,
@@ -35,9 +19,17 @@ const config = {
       gravity: { y: gameOptions.gravity },
     },
   },
-  scene: JumpScene,
 };
 
-const game = new Phaser.Game(config);
+class Game extends Phaser.Game {
+  constructor() {
+    super(config);
+    this.scene.add('Game', GameScene);
+    this.scene.add('Start', StartScene);
+    this.scene.start('Start');
+  }
+}
+
+const game = new Game();
 
 game();
