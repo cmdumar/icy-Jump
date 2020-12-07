@@ -4,7 +4,7 @@ import platform from '../assets/platform.png';
 import codey from '../assets/codey.png';
 
 let game;
-let platforms;  // a group of platform objects the player will jump on
+let platforms;// a group of platform objects the player will jump on
 let player; // the actual player controlled sprite
 let cursors;
 let platformCount = 0;
@@ -71,5 +71,23 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
 
     cursors = this.input.keyboard.createCursorKeys();
+  }
+
+  update() {
+    if (cursors.left.isDown) {
+      player.setVelocityX(-240);
+      player.flipX = true;
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(240);
+      player.flipX = false;
+    } else {
+      player.setVelocityX(0);
+    }
+
+    if (player.body.touching.down) {
+      player.setVelocityY(-500);
+
+      this.cameras.main.shake(100, 0.004);
+    }
   }
 }
