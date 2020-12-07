@@ -39,6 +39,26 @@ export default class GameScene extends Phaser.Scene {
 
     graphics.fillRect(0, 0, gameOptions.width, gameOptions.height);
 
-    this.add.image(240, 300, 'logo');
+    this.anims.create({
+      key: 'jump',
+      frames: this.anims.generateFrameNames('codey', {
+        start: 2,
+        end: 3,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.physics.world.setBounds(0, 0, 480, 640);
+
+    platforms = this.physics.add.group({
+      allowGravity: false,
+      immovable: true,
+    });
+
+    for (let i = 0; i < 8; i += 1) {
+      const randomX = Math.floor(Math.random() * 400) + 24;
+      platforms.create(randomX, i * 80, 'platform').setScale(0.5);
+    }
   }
 }
