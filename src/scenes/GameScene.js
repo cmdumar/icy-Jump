@@ -60,5 +60,16 @@ export default class GameScene extends Phaser.Scene {
       const randomX = Math.floor(Math.random() * 400) + 24;
       platforms.create(randomX, i * 80, 'platform').setScale(0.5);
     }
+
+    player = this.physics.add.sprite(100, 450, 'codey').setScale(0.5);
+    player.setBounce(1);
+    player.setCollideWorldBounds(true);
+    player.body.checkCollision.up = false;
+    player.body.checkCollision.left = false;
+    player.body.checkCollision.right = false;
+
+    this.physics.add.collider(player, platforms);
+
+    cursors = this.input.keyboard.createCursorKeys();
   }
 }
