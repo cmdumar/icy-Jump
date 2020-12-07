@@ -9,6 +9,8 @@ let cursors;
 let platformCount = 0;
 let emitter;
 let particles;
+let score = 0;
+let scoreText;
 const gameOptions = {
   width: 480,
   height: 640,
@@ -24,6 +26,7 @@ function updateY(platform) {
 
 
   if (platform.y > 640) {
+    score += 1;
     platform.y = -platform.height;
     platform.x = Math.floor(Math.random() * 400) + 24;
     platformCount += 1;
@@ -49,7 +52,8 @@ export default class GameScene extends Phaser.Scene {
 
     const graphics = this.add.graphics();
 
-    graphics.fillGradientStyle(0xdadaff, 0x6cfafa, 0xfccaff, 0xdadaff, 1);
+    graphics.fillGradientStyle(0xcfd9df, 0xe2ebf0,
+      0xfccaff, 0xe2ebf0, 1);
 
     graphics.fillRect(0, 0, gameOptions.width, gameOptions.height);
 
@@ -75,7 +79,7 @@ export default class GameScene extends Phaser.Scene {
       platforms.create(randomX, i * 80, 'platform').setScale(0.5);
     }
 
-    player = this.physics.add.sprite(100, 450, 'codey').setScale(0.5);
+    player = this.physics.add.sprite(100, 350, 'codey').setScale(0.5);
     player.setBounce(1);
     player.setCollideWorldBounds(true);
     player.body.checkCollision.up = false;
@@ -85,6 +89,9 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
 
     cursors = this.input.keyboard.createCursorKeys();
+
+    scoreText = this.add.text(10, 20, 'Score: 0',
+      { fontSize: '15px', color: '#000' });
   }
 
   update() {
@@ -100,13 +107,17 @@ export default class GameScene extends Phaser.Scene {
 
     if (player.body.touching.down) {
       player.setVelocityY(-500);
-
-      this.cameras.main.shake(100, 0.004);
+      this.cameras.main.shake(100, 0.001);
     }
+
+    // if (!player.body.touching.down && !player.body.blocked.down) {
+    //   player.anims.pause();
+    // }
 
     player.anims.play('jump', true);
 
     if (player.body.y < gameOptions.height / 2) {
+      scoreText.setText(`Score: ${score}`);
       platforms.children.iterate(updateY, this);
     }
 
@@ -123,7 +134,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     if (player.body.y > gameOptions.height || player.body.blocked.down) {
-      this.cameras.main.shake(240, 0.01,
+      this.cameras.main.shake(240, 0.004,
         false, function (camera, progress) {
           if (progress > 0.9) {
             this.scene.stop('Game');
@@ -133,3 +144,5 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 }
+
+export { score };
