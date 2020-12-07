@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import StartScene from './scenes/StartScene';
 import GameScene from './scenes/GameScene';
+import EndScene from './scenes/EndScene';
 
 const gameOptions = {
   width: 480,
@@ -26,6 +27,7 @@ class Game extends Phaser.Game {
     super(config);
     this.scene.add('Game', GameScene);
     this.scene.add('Start', StartScene);
+    this.scene.add('EndScene', EndScene);
     this.scene.start('Start');
   }
 }

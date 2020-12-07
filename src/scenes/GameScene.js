@@ -126,7 +126,8 @@ export default class GameScene extends Phaser.Scene {
       this.cameras.main.shake(240, 0.01,
         false, function (camera, progress) {
           if (progress > 0.9) {
-            this.scene.start('Game');
+            this.scene.stop('Game');
+            this.scene.start('EndScene');
           }
         });
     }
