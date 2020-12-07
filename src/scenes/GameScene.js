@@ -3,18 +3,31 @@ import stripe from '../assets/stripe.png';
 import platform from '../assets/platform.png';
 import codey from '../assets/codey.png';
 
-let game;
 let platforms;// a group of platform objects the player will jump on
 let player; // the actual player controlled sprite
 let cursors;
 let platformCount = 0;
 let emitter;
 let particles;
-let gameOptions = {
+const gameOptions = {
   width: 480,
   height: 640,
   gravity: 800,
 };
+
+function updateY(platform) {
+  const delta = Math.floor(gameOptions.height / 2) - player.y;
+
+  if (delta > 0) {
+    platform.y += delta / 30;
+  }
+
+  if (platform.y > 640) {
+    platform.y = -platform.height;
+    platform.x = Math.floor(Math.random() * 400) + 24;
+    platformCount += 1;
+  }
+}
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -88,6 +101,24 @@ export default class GameScene extends Phaser.Scene {
       player.setVelocityY(-500);
 
       this.cameras.main.shake(100, 0.004);
+    }
+
+    player.anims.play('jump', true);
+
+    if (player.body.y < gameOptions.height / 2) {
+      platforms.children.iterate(updateY, this);
+    }
+
+    if (platformCount > 10 && emitter) {
+      emitter = particles.createEmitter({
+        x: { min: 0, max: gameOptions.width },
+        y: gameOptions.height + 10,
+        lifespan: 2500,
+        speedY: { min: -300, max: -500 },
+        scale: 0.5,
+        quantity: 5,
+        blendMode: 'ADD',
+      });
     }
   }
 }
