@@ -2,23 +2,22 @@ import Phaser from 'phaser';
 import stripe from '../assets/stripe.png';
 import platform from '../assets/platform.png';
 import codey from '../assets/codey.png';
+import { gameState } from '../helpers/helpers';
 
-let platforms;// a group of platform objects the player will jump on
-let player; // the actual player controlled sprite
+let platforms;
+let player;
 let cursors;
 let platformCount = 0;
 let emitter;
 let particles;
-let score = 0;
 let scoreText;
-const gameOptions = {
-  width: 480,
-  height: 640,
-  gravity: 800,
-};
+
+const { width, height } = gameState();
+// eslint-disable-next-line import/no-mutable-exports
+let { score } = gameState();
 
 function updateY(platform) {
-  const delta = Math.floor(gameOptions.height / 2) - player.y;
+  const delta = Math.floor(height / 2) - player.y;
 
   if (delta > 0) {
     platform.y += delta / 30;
@@ -55,7 +54,7 @@ export default class GameScene extends Phaser.Scene {
     graphics.fillGradientStyle(0xcfd9df, 0xe2ebf0,
       0xfccaff, 0xe2ebf0, 1);
 
-    graphics.fillRect(0, 0, gameOptions.width, gameOptions.height);
+    graphics.fillRect(0, 0, width, height);
 
     this.anims.create({
       key: 'jump',
@@ -110,21 +109,17 @@ export default class GameScene extends Phaser.Scene {
       this.cameras.main.shake(100, 0.001);
     }
 
-    // if (!player.body.touching.down && !player.body.blocked.down) {
-    //   player.anims.pause();
-    // }
-
     player.anims.play('jump', true);
 
-    if (player.body.y < gameOptions.height / 2) {
+    if (player.body.y < height / 2) {
       scoreText.setText(`Score: ${score}`);
       platforms.children.iterate(updateY, this);
     }
 
     if (platformCount > 10 && emitter) {
       emitter = particles.createEmitter({
-        x: { min: 0, max: gameOptions.width },
-        y: gameOptions.height + 10,
+        x: { min: 0, max: width },
+        y: height + 10,
         lifespan: 2500,
         speedY: { min: -300, max: -500 },
         scale: 0.5,
@@ -133,9 +128,9 @@ export default class GameScene extends Phaser.Scene {
       });
     }
 
-    if (player.body.y > gameOptions.height || player.body.blocked.down) {
+    if (player.body.y > height || player.body.blocked.down) {
       this.cameras.main.shake(240, 0.004,
-        false, function (camera, progress) {
+        false, (camera, progress) => {
           if (progress > 0.9) {
             this.scene.stop('Game');
             this.scene.start('PreEnd');

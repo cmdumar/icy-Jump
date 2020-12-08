@@ -1,4 +1,7 @@
 import Phaser from 'phaser';
+import { gameState } from '../helpers/helpers';
+
+const { width, height } = gameState();
 
 function isNameValid(name) {
   if (name.length < 1) {
@@ -15,11 +18,6 @@ const form = `
     </div>
 `;
 
-const config = {
-  width: 480,
-  height: 640,
-};
-
 export default class NamesScene extends Phaser.Scene {
   constructor() {
     super('PreEnd');
@@ -31,23 +29,23 @@ export default class NamesScene extends Phaser.Scene {
     graphics.fillGradientStyle(0xcfd9df, 0xe2ebf0,
       0xfccaff, 0xe2ebf0, 1);
 
-    graphics.fillRect(0, 0, config.width, config.height);
+    graphics.fillRect(0, 0, width, height);
 
     this.enterNamesText = this.add.text(
       0, 0,
       'Enter your name to continue: ', { fontSize: '20px', fill: '#000' },
     );
 
-    this.zone = this.add.zone(config.width / 2,
-      config.height / 3, config.width, config.height);
+    this.zone = this.add.zone(width / 2,
+      height / 3, width, height);
 
     Phaser.Display.Align.In.Center(
       this.enterNamesText,
       this.zone,
     );
 
-    this.namesForm = this.add.dom((config.width / 2),
-      (config.height / 2)).createFromHTML(form);
+    this.namesForm = this.add.dom((width / 2),
+      (height / 2)).createFromHTML(form);
     this.namesForm.addListener('click');
 
     this.namesForm.on('click', event => {

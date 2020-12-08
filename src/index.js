@@ -7,6 +7,7 @@ import CreditsScene from './scenes/CreditsScene';
 import PreEndScene from './scenes/PreEndScene';
 import EndScene from './scenes/EndScene';
 import './style.scss';
+import InstructionScene from './scenes/InstructionScene';
 
 const gameOptions = {
   width: 480,
@@ -37,6 +38,7 @@ class Game extends Phaser.Game {
     this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Start', StartScene);
     this.scene.add('Game', GameScene);
+    this.scene.add('Instruction', InstructionScene);
     this.scene.add('Credits', CreditsScene);
     this.scene.add('PreEnd', PreEndScene);
     this.scene.add('EndScene', EndScene);
