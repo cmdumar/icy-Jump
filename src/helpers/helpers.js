@@ -45,4 +45,6 @@ const gameState = () => {
   return data;
 };
 
-export { leaderBoard, centerCoord, gameState };
+export {
+  leaderBoard, centerCoord, gameState,
+};

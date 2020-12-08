@@ -1,14 +1,8 @@
 import Phaser from 'phaser';
 import { gameState } from '../helpers/helpers';
+import isNameValid from '../helpers/validateName';
 
 const { width, height } = gameState();
-
-function isNameValid(name) {
-  if (name.length < 1) {
-    return false;
-  }
-  return true;
-}
 
 const player = { name: 'player' };
 const form = `
