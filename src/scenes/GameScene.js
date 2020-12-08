@@ -138,7 +138,7 @@ export default class GameScene extends Phaser.Scene {
         false, function (camera, progress) {
           if (progress > 0.9) {
             this.scene.stop('Game');
-            this.scene.start('EndScene');
+            this.scene.start('PreEnd');
           }
         });
     }

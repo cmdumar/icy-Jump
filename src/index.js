@@ -1,7 +1,12 @@
 import Phaser from 'phaser';
+import BootScene from './scenes/BootScene';
+import PreloaderScene from './scenes/PreloaderScene';
 import StartScene from './scenes/StartScene';
 import GameScene from './scenes/GameScene';
+import CreditsScene from './scenes/CreditsScene';
+import PreEndScene from './scenes/PreEndScene';
 import EndScene from './scenes/EndScene';
+import './style.scss';
 
 const gameOptions = {
   width: 480,
@@ -11,9 +16,12 @@ const gameOptions = {
 
 const config = {
   type: Phaser.AUTO,
+  parent: 'icyJump',
+  dom: {
+    createContainer: true,
+  },
   width: gameOptions.width,
   height: gameOptions.height,
-  backgroundColor: '#4599ff',
   physics: {
     default: 'arcade',
     arcade: {
@@ -25,10 +33,14 @@ const config = {
 class Game extends Phaser.Game {
   constructor() {
     super(config);
-    this.scene.add('Game', GameScene);
+    this.scene.add('Boot', BootScene);
+    this.scene.add('Preloader', PreloaderScene);
     this.scene.add('Start', StartScene);
+    this.scene.add('Game', GameScene);
+    this.scene.add('Credits', CreditsScene);
+    this.scene.add('PreEnd', PreEndScene);
     this.scene.add('EndScene', EndScene);
-    this.scene.start('Start');
+    this.scene.start('Boot');
   }
 }
 
