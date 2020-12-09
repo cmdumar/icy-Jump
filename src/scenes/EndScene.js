@@ -51,13 +51,6 @@ export default class EndScene extends Phaser.Scene {
         fill: '#fff',
       })
       .setOrigin(0.5);
-    this.add.text(screenCenterX, 90,
-      'Click to Restart', {
-        fontSize: '18px',
-        fill: '#fff',
-      })
-      .setOrigin(0.5);
-
 
     this.backButton = new Button(this, width / 2,
       height / 2 + 220, 'blueButton1', 'blueButton2', 'Go Back', 'Start');
