@@ -29,7 +29,7 @@ Use left and right arrow keys to control the player. Land on the platform to sta
 
 ## Live Demo
 
-[Live Link](#)
+[Live Link](https://pensive-hopper-fc7d88.netlify.app/)
 
 ## Authors
 
