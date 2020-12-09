@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+input[type="text"] {
+  font-size: 17px;
+  border: 1px solid #ccc;
+  padding: 7px 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+.continue-btn {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 15px;
+}
