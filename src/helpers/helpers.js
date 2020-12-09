@@ -1,29 +1,10 @@
-const leaderBoard = async (score, player) => {
-  const apikey = 'aSvX9oE6ttiscNQe1eCC';
-  const base = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
+const baseURL = () => {
+  const data = {
+    apikey: 'aSvX9oE6ttiscNQe1eCC',
+    base: 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/',
+  };
 
-  if (score > 10) {
-    const rawResponse = await fetch(`${base + apikey}/scores/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user: player.name,
-        score,
-      }),
-    });
-    await rawResponse.json();
-  }
-
-  const getScores = await fetch(`${base + apikey}/scores/`);
-
-  const scores = await getScores.json();
-
-  let sorted = await Promise.all(await scores.result);
-  sorted = sorted.sort((a, b) => b.score - a.score);
-
-  return sorted;
+  return data;
 };
 
 const centerCoord = (scene) => {
@@ -45,6 +26,12 @@ const gameState = () => {
   return data;
 };
 
+const highScores = async ({ result }) => {
+  const arr = await result;
+  const sorted = arr.sort((a, b) => b.score - a.score).slice(0, 9);
+  return sorted;
+};
+
 export {
-  leaderBoard, centerCoord, gameState,
+  centerCoord, gameState, highScores, baseURL,
 };

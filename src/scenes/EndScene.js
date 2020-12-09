@@ -1,8 +1,11 @@
 import Phaser from 'phaser';
 import { player } from './PreEndScene';
 import { score } from './GameScene';
-import { leaderBoard, centerCoord, gameState } from '../helpers/helpers';
+import leaderBoard, { saveScore } from '../helpers/leaderBoard';
+import { centerCoord, gameState, baseURL } from '../helpers/helpers';
 import Button from '../helpers/Button';
+
+const { base, apikey } = baseURL();
 
 export default class EndScene extends Phaser.Scene {
   constructor() {
@@ -18,13 +21,17 @@ export default class EndScene extends Phaser.Scene {
       fill: '#fff',
     }).setOrigin(0.5);
 
-    const sorted = await leaderBoard(score, player);
+    if (score > 10) {
+      await saveScore(base, apikey, score, player);
+    }
+
+    const sorted = await leaderBoard(base, apikey);
 
     if (sorted) {
       this.title.setText('LeaderBoard');
     }
 
-    sorted.slice(0, 10)
+    sorted
       .forEach((i, idx) => {
         this.add.text((width / 4), (height / 2) - 120 + (idx * 30),
           `${idx + 1}. ${i.user}: ${i.score}`, {
