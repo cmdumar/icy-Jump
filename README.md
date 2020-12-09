@@ -1,28 +1,35 @@
-## Platform Game
+# Icy Jump
 
-> A Platformer game made with Phaser 3 and ES6.
+> A knockoff of Doodle Jump game. Developed with Phaser 3 framework.
 
-## Built with
+## Requirements
+
+[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
+
+## How To Play
+
+Use left and right arrow keys to control the player. Land on the platform to stay alive. Player dies when falls on the ground.
+
+## Built With
 
 * Phaser 3
 * Javascript (ES6)
 * Sass
 * Webpack
+* Jest
+
+## Available Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm install` | Install project dependencies |
+| `npm start` | Build project and open web server running project |
+| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
+| `npm test` | Tests the applications |
 
 ## Live Demo
 
 [Live Link](#)
-
-## How To run the Project
-
-* Open Terminal/Command line
-1. Run `git clone https://github.com/mohammadumar28/js-capstone-game.git` to clone the project.
-2. Run `npm install` to install node modules.
-3. Open `dist/index.html` in a browser.
-
-## Run Tests
-
-* `npm test` to run all tests.
 
 ## Authors
 
