@@ -1,6 +1,6 @@
 # Icy Jump
 
-> A knockoff of Doodle Jump game. Developed with Phaser 3 framework.
+> A Platform based game with score sharing feature. Made with JavaScript Game library - Phaser 3.
 
 ## Screenshot
 
