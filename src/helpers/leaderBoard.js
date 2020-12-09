@@ -1,11 +1,14 @@
 import { highScores } from './helpers';
 
 const leaderBoard = async (base, apikey) => {
-  const getScores = await fetch(`${base + apikey}/scores/`)
-    .then(res => res.json())
-    .then(res => highScores(res))
-    .catch(err => err);
-
+  let getScores;
+  try {
+    getScores = await fetch(`${base + apikey}/scores/`)
+    getScores = await getScores.json();
+    getScores = await highScores(getScores);
+  } catch (err) {
+    getScores = err;
+  }
   return getScores;
 };
 
