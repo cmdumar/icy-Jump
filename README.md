@@ -35,6 +35,10 @@ Use left and right arrow keys to control the player. Land on the platform to sta
 
 [Live Link](https://pensive-hopper-fc7d88.netlify.app/)
 
+## Presentaion
+
+[Video Presentation Link](https://www.loom.com/share/2267d2bd2d40453b858eedaaa252322e)
+
 ## Authors
 
 **Muhammad Umar**
