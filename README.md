@@ -2,10 +2,6 @@
 
 > A Platform based game with score sharing feature. Made with JavaScript Game library - Phaser 3.
 
-## Screenshot
-
-![Screenshot](public/screenshot.png)
-
 ## Requirements
 
 [Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
@@ -33,7 +29,7 @@ Use left and right arrow keys to control the player. Land on the platform to sta
 
 ## Live Demo
 
-[Live Link](https://pensive-hopper-fc7d88.netlify.app/)
+[Live Link](https://icy-jump.netlify.app/)
 
 ## Presentaion
 
@@ -46,6 +42,10 @@ Use left and right arrow keys to control the player. Land on the platform to sta
 - LinkedIn: [Mohammad Umar](https://www.linkedin.com/in/mohammadumar28/)
 - Twitter: [@Mohammadumar28](https://twitter.com/Mohammadumar28)
 - Email: [mohammadumar28@gmail.com](mailto:mohammadumar28@gmail.com)
+
+## Screenshot
+
+![Screenshot](public/screenshot.png)
 
 ## Acknowledgements
 
